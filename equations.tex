@@ -1,0 +1,194 @@
+% \documentclass{article}% remove option "german" for english version
+% % load definitions, i.e. some useful shortcuts and notational stuff for tensors etc.
+% \include{definitions}%
+
+
+% \RequirePackage[utf8]{inputenc}
+% \RequirePackage{verbatim}
+% \RequirePackage{graphics,graphicx}
+% \RequirePackage{fancyhdr}
+% \RequirePackage{amsmath,amssymb}
+% \RequirePackage[square]{natbib}
+% \RequirePackage{subfigure}
+% \RequirePackage{listings}
+% \let\trace\relax % trace already defined but newly defined in physics package, workaround
+% \RequirePackage{physics}
+% \RequirePackage{hyperref}
+% \RequirePackage[crop=pdfcrop,process=auto]{pstool} % irgendwann wieder auf process=all umstellen, aber auto geht schneller
+% \begin{document}
+
+\chapter{Maths and stuff}
+\thispagestyle{fancy}
+
+
+\label{chap:maths}
+
+\section{Evolution Equations}
+\label{sec:evoeq}
+
+The heat treatment process is simulated with the transformation of austenite into bainite and martensite.... 
+
+\newpage
+\begin{comment}
+to describe the volume fraction of martensite during phase transformation the Kostinen-Marburger model \ref{eq:KM} is utilised. The KM model is purely temperature dependent. 
+\begin{align}
+	\beta_M &=  1 - e^{-k\,(M_S - T)} \label{eq:KM}\\
+	\dot{\beta}_M &= -e^{-k\left[M_S-T\right]} k \, \dot{T} = \left[ 1-e^{-k\left[M_S-T\right]} - 1 \right] k \, \dot{T} = - \left[ 1-\beta_M \right] k \, \dot{T}
+\end{align}
+For generalizing the model for more phases the term $\left[ 1-\beta_M \right]$ can be interpreted as the remaining austenite $\beta_A$ available for transformation. This yields the following rate equation 
+\begin{align}
+	\dot{\beta}_M = - \beta_A \, k \, \dot{T} \quad.
+\end{align}
+ The martensitic transformation only starts below the martensite starting temperature $M_S$ and ends at the martensite finish temperature $M_F$. The factor k is used for calibration purposes. It festlegt how much residual austenite $\beta_A^r$ remains below $M_S$ after the finished transformation
+ $ k = - \ln(1-\frac{\beta_{Ar}}{\beta_A^0})/(M_S - M_F) $. 
+To incorporate these conditions and ensure transformation only occurs during cooling a Heaviside function $\Gamma(x)$ is used (Hömberg, 1996; Chen et al., 1997). \\
+Multiplying the following term 
+\begin{equation}
+	\zeta_{A \rightarrow M} = \Gamma(-\dot{T})\,\Gamma(M_S - T)\,\Gamma(T-M_f)
+\end{equation}
+to the rate equation for the martensitic transformation yields it's final form
+\begin{equation}
+	\dot{\beta_M} = - \zeta_{A \rightarrow M} \, \beta_A\, k\,\dot{T} \quad. \label{eq:AMrate}
+\end{equation}
+
+In contrast to the martensitic transformation, the bainite transformation is diffusive, time dependent.
+The equation used to describe this transformation is the JMAK law developed by Johnson, Mehl, Avrami and Kolmogorov
+(Avrami, 1940; Cahn, 1956). 
+The JMAK law 
+\begin{align}
+	\beta_B = \hat{\beta}_B^{max}\,[1-e^{-b_B\,(t^{N_B})}] \label{eq:JMAK}
+\end{align}
+is only valid for isothermal transformation. \\
+The parameters 
+\begin{align}
+	N_B(T) = \frac{6.1273}{\ln(\frac{t_B^f}{t_B^s})}\,\quad \text{and} \quad b_B(T) = \frac{0.01005}{(t^s_B)^{N_B(T)}}
+\end{align}
+are derived using the starting and finishing time $t_B^s$ and $t_B^f$ for the diffusive transformation. Those are defined at volume fraction of 1\% and 99\% of the target phase. The parameters are temperature dependent and can be determined from experimental TTT diagrams (Diss Yu 1977 oder so).
+The time derivation of \ref{eq:JMAK} yields the rate equation for isothermal cooling
+\begin{equation}
+	\dot{\beta}_B = \hat{\beta}_B^{max}\,b_B\,N_B\,t^{(N_B-1)}\,[1-\beta_B] \label{eq:ABrate0}
+\end{equation}
+
+
+% Adaption of JMAK law for anisothermal
+As the JMAK law in eq. \ref{eq:JMAK} is only valid for isothermal transformations it has to be adapted to depict a cooling process. The cooling curve is discretized into small isothermal steps at declining temperatures. Every step $i$ is defined by it's temperature $T_i$ and it's duration $\Delta t_i$. \\
+In the following the procedure is explained using two isothermal steps of $\Delta t = 1.5s$ at the temperatures  $T1 = 600^\circ C$ and $T2 = 550^\circ C$. \\ 
+The first step starts at P0 with a volume fraction of bainite 
+$\beta_B = 0$ and ends at P1 after $\Delta t$ at $\beta_B^1 = 0.17$ following the transformation curve for T1.  
+For the next step at T2, a fictitious point P1$^\ast$ is introduced. It is the intersection of $\beta_B = \beta_B^1$ with the transformation curve for T2. The time will be called ficitious time $t^\ast$. It is the time transformation at T2 would take to yield $\beta_B^1$.\\
+Then transformation is again  following the curve for $T2$ for a $\Delta t$ of 1.5s finishing at a volume fraction $\beta_B$ of 0.78. \\
+
+
+% Grafik aus phasenumwandlung_beispiele_MS.ipynb weit unten
+\begin{figure}[h]
+\centering
+\psfragfig[width = 0.7\textwidth, trim = 0 0 0 0, clip = true]{figs/fictitiousTimeSteps}
+\caption{Two isothermal cooling steps.}
+\label{fig:ficTime}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\psfragfig[width = 0.3\textwidth, trim = 0 0 0 0, clip = true]{figs/isothermalStepsTt} 
+\caption{Discretized example cooling curve.}
+\label{fig:discTt}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\psfragfig[width = 0.9\textwidth, trim = 0 0 0 0, clip = true]{figs/isothermalSteps} 
+\caption{}
+\label{fig:}
+\end{figure}
+
+
+
+% include more graphics 
+
+To incorporate the fictitious time into the rate equation the steps laid out in (Reti 2001) are done. Using the JMAK law \ref{eq:JMAK}, the fictitious time for a given volume fraction $\beta_B$ and a temperature $T$ is derived as 
+\begin{equation}
+	t^\ast = \left( \frac{\ln A}{b(T_{i+1})}\right)^\frac{1}{N(T_{i+1})}, \quad A = \frac{\hat{\beta}}{\hat{\beta}-\beta_i}  \quad.
+\end{equation}
+This relation then is inserted into the rate equation \ref{eq:ABrate} to replace the isothermal transformation time and eliminate the explicit time dependence 
+\begin{equation}
+	\dot{\beta} = N\,b^{\frac{1}{N}}\,(\hat{\beta}-\beta)\,\left(\ln A \right)^{1-\frac{1}{N}}\quad. \label{ABrate}
+\end{equation}
+To ... enable more phases the maximal volume fraction  of bainite $\hat{\beta}$ in (Oliviera 2010) is interpreted as 
+\begin{equation}
+	\hat{\beta} = 1 - \beta_M \quad. 
+\end{equation}
+This leads to a desired coupling of the rate equations of Bainite and Martensite. \\\\
+
+\end{comment}
+The initial value problem represented by the rate equations is solved by implicit time integration which leads to the evolution equation $\beta^{n+1} = \beta^n + \Delta \beta^{n+1}, \quad \text{with  } \Delta \beta^{n+1} = \Delta t \, \dot{\beta}^{n+1}$. \\
+After bringing these equations into residual form 
+\begin{align}
+	\begin{split}
+		\vc {R_{\beta}} &= \vc \beta^{n+1} - \vc \beta^n- \vc {\Delta \beta} \\
+		&= \begin{bmatrix}
+			R_{\beta_B}\\ 
+			R_{\beta_M}
+		\end{bmatrix} 		
+		= \begin{bmatrix}
+			\beta_B^{n+1} - \beta_B^{n} - \Delta \beta_B^{n+1} \\ 
+			\beta_M^{n+1} - \beta_M^{n} - \Delta \beta_M^{n+1}
+		\end{bmatrix}
+	\end{split} \label{eq:betaRes}
+	\\
+	&\text{with  } \vc {\Delta \beta} = f(\vc \beta^{n+1})
+\end{align}
+the backward Newton method is used to solve the equation system \ref{eq:betaRes}. The update of the backward Newton 
+\begin{equation}
+	\vc \beta^{k+1} = \vc \beta^k - \frac{\vc {R_\beta}}{\vc {R_\beta \prime}}
+	\label{eq:NewtonUpdate}
+\end{equation}
+with the iteration counter $k$ requires the derivation of the tangent 
+\begin{gather}
+	\vc {R_\beta \prime} = 
+	\begin{bmatrix}
+		\pdv{R_{\beta_B}}{\beta_B}&\pdv{R_{\beta_B}}{\beta_M}\\
+		\pdv{R_{\beta_M}}{\beta_B}&\pdv{R_{\beta_M}}{\beta_M}\quad \text{with}\\ 
+	\end{bmatrix}\\
+	\pdv{R_{\beta_B}}{\beta_B} = 1 - \Delta t \,b^{\frac{1}{N}}\, N \left[B^{1-\frac{1}{N}} 
+		- \left(1- \frac{1}{N}\right)\,B^{-\frac{1}{N}}\, \right] \\
+	\pdv{R_{\beta_B}}{\beta_M} = 
+		- \Delta t \,b^{\frac{1}{N}}\, N 
+		\left[B^{1-\frac{1}{N}} 
+		- \left(1- \frac{1}{N}\right)\,B^{-\frac{1}{N}}\,\left(1- \frac{\beta_A}{1-\beta_M}\right)
+		\right]\\
+	\pdv{R_{\beta_M}}{\beta_B} = -k\,\Delta T \, \zeta_{A \rightarrow M}\\
+	\pdv{R_{\beta_M}}{\beta_M} = 1 - k\,\Delta T \,\zeta_{A \rightarrow M} \quad.
+\end{gather}
+
+
+
+\begin{comment}
+	Volume Fraction of diffusive phases Bainite for isothermal 
+\begin{gather}
+	W = 1-\exp \Big(-b_B\,t^{N_B}\Big) \\
+	\text{starting time: } W = 1 \% = 1-\exp({-b_B\,{t_B^s}^{N_B}}) \\
+	\Leftrightarrow t_B^s = \left(\frac{\ln(99\%)}{-b}\right)^{1/N_B} = \left(\frac{0.01005}{b}\right)^{1/N_B}\\
+	b_B = \frac{0.01005}{(t^s_B)^{N_B}}\\
+	\frac{\ln(1-W)}{-b_B} = {t_B^s}^{N_B} \\
+	\Leftrightarrow  \frac{\ln(1\%)}{\ln(99\%)} = \ln \left(\frac{t_B^s}{t_B^f}\right)\,N_B\\
+	N_B = \frac{6.1273}{\ln \left(\frac{t_B^f}{t_B^s}\right)}
+\end{gather}
+The start and the finishing time of the diffusive transformation are defined by the following relations
+\begin{align}
+	W(t_B^s) = 1\% \quad \text{and} \quad W(t_B^f) = 99\%\,.
+\end{align}
+Inserting ... in the JMAK law yields the equations for $N_B$ and $b_B$ 
+
+
+Evolution equation for diffusive trafo, see Reti and Oliviera 2010
+\begin{gather}
+	\beta = \hat{\beta} \, \left(1-\exp(-b \, t^N)\right)\\
+	t = \left( \frac{\ln A}{b}\right)^\frac{1}{N}, \quad A = \frac{\hat{\beta}}{\hat{\beta}-\beta}\\
+	\dot{\beta} = N\,b^{\frac{1}{N}}\,(\hat{\beta}-\beta)\,\left(\ln A \right)^{1-\frac{1}{N}}\\
+	\hat{\beta} = 1 - \beta_M
+\end{gather}
+\end{comment}
+
+
+
+% \end{document}

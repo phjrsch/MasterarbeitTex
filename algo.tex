@@ -1,0 +1,73 @@
+\chapter{Algorithmic implementation}
+\thispagestyle{fancy}
+\label{chap:algo}
+
+
+After establishing the rate equations for the phase transformations \ref{eq:ABrate} and \ref{eq:rateKM} in the previous chapter \ref{chap:model} there are modifications and regularisations necessary before one is able to use them for computation. For both equations a term $\zeta$ is introduced that controls whether transformation is happening or not, cf. \cite{pacheco_analysis_2001} and \cite{de_oliveira_thermomechanical_2010}. \\
+For the martensitic transformation $\zeta_{A \rightarrow B}$ contains two heaviside functions $\Gamma$ and a regularized step function using a $\tanh$. The first heaviside function $\Gamma(-\Delta\,T)$ ensures irreversibility and that transformation only occurs during cooling. The second heaviside function $\Gamma(T-M_F)$ prevents transformation below the martensite finish temperature. The regularized step function $\tanh(A\*(M_S-T))/2 + 1/2$ starts the transformation after the temperature is blow the martensite starting temperature. The regularization deals with the discontinuity of the transformation rate at $T=M_S$. The influence of $A$ is depicted in fig. \ref{fig:tanHPara}.
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/tanHPara} %width = 0.9\textwidth,
+\caption{Regularized step function using a tanh with different parameters.}
+\label{fig:tanHPara}
+\end{figure}
+ The choice of $A=1$ makes the effect of the regularization disappear ($< 1e-6$) at $M_S \pm 2\%$. \\
+This yields the extended rate equation for the evolution of the martensitic volume fraction
+\begin{align}
+	\dot{\beta}_M &= - \zeta_{A \rightarrow M} \, \beta_A \, k \, \dot{T}  \\
+	\text{with } \zeta_{A \rightarrow M} &= \Gamma(-\Delta\,T)\,\Gamma(T-M_F)\, (\tanh(A\*(M_S-T))/2 + 1/2) \quad. 
+\end{align}
+
+
+For the bainite transformation a new local time scale for every material point is introduced. The transformation time $\tau$ starts once the temperature at the material point drops below the bainite starting temperature $T_B^s$. This time scale is used to account for vastly different incubation times at different temperatures. The incubation time is regarded as the time on the left of the bainite starting time $t_B^s$ when looking at the TTT Diagram in fig. \ref...
+
+
+The time on the left of the bainite starting time $t_B^s$ when looking at the TTT Diagram in fig. \ref... is regarded as incubation time. The incubation time $\tau$ necessary to start the transformation is vastly different at different temperatures. To account for this in a similar way to the anisothermal evolution of bainite, Scheill's additivity \cite... is used to determine when $t_B^s$ is reached following a cooling curve. \\
+The following condition is checked at every time step after an update of $\tau$ to determine the start of the transformation
+\begin{gather}
+	\tau = \tau + \frac{\Delta T}{t_B^s} \\
+	t_B^s \geq \ \tau \quad.
+\end{gather}
+
+
+
+
+The initial value problem represented by the rate equations is solved by implicit time integration which leads to the evolution equation $\beta^{n+1} = \beta^n + \Delta \beta^{n+1}, \quad \text{with  } \Delta \beta^{n+1} = \Delta t \, \dot{\beta}^{n+1}$. \\
+After bringing these equations into residual form 
+\begin{align}
+	\begin{split}
+		\vc {R_{\beta}} &= \vc \beta^{n+1} - \vc \beta^n- \vc {\Delta \beta} \\
+		&= \begin{bmatrix}
+			R_{\beta_B}\\ 
+			R_{\beta_M}
+		\end{bmatrix} 		
+		= \begin{bmatrix}
+			\beta_B^{n+1} - \beta_B^{n} - \Delta \beta_B^{n+1} \\ 
+			\beta_M^{n+1} - \beta_M^{n} - \Delta \beta_M^{n+1}
+		\end{bmatrix}
+	\end{split} \label{eq:betaRes}
+	\\
+	&\text{with  } \vc {\Delta \beta} = f(\vc \beta^{n+1})
+\end{align}
+the backward Newton method is used to solve the equation system \ref{eq:betaRes}. The update of the backward Newton 
+\begin{equation}
+	\vc \beta^{k+1} = \vc \beta^k - \frac{\vc {R_\beta}}{\vc {R_\beta \prime}}
+	\label{eq:NewtonUpdate}
+\end{equation}
+with the iteration counter $k$ requires the derivation of the tangent 
+\begin{gather}
+	\vc {R_\beta \prime} = 
+	\begin{bmatrix}
+		\pdv{R_{\beta_B}}{\beta_B}&\pdv{R_{\beta_B}}{\beta_M}\\
+		\pdv{R_{\beta_M}}{\beta_B}&\pdv{R_{\beta_M}}{\beta_M}\quad \text{with}\\ 
+	\end{bmatrix}\\
+	\pdv{R_{\beta_B}}{\beta_B} = 1 - \Delta t \,b^{\frac{1}{N}}\, N \left[B^{1-\frac{1}{N}} 
+		- \left(1- \frac{1}{N}\right)\,B^{-\frac{1}{N}}\, \right] \\
+	\pdv{R_{\beta_B}}{\beta_M} = 
+		- \Delta t \,b^{\frac{1}{N}}\, N 
+		\left[B^{1-\frac{1}{N}} 
+		- \left(1- \frac{1}{N}\right)\,B^{-\frac{1}{N}}\,\left(1- \frac{\beta_A}{1-\beta_M}\right)
+		\right]\\
+	\pdv{R_{\beta_M}}{\beta_B} = -k\,\Delta T \, \zeta_{A \rightarrow M}\\
+	\pdv{R_{\beta_M}}{\beta_M} = 1 - k\,\Delta T \,\zeta_{A \rightarrow M} \quad.
+\end{gather}

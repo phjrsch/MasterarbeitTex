@@ -1,0 +1,32 @@
+\documentclass{article}% remove option "german" for english version
+% load definitions, i.e. some useful shortcuts and notational stuff for tensors etc.
+\include{definitions}%
+
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{verbatim}
+\RequirePackage{graphics,graphicx}
+\RequirePackage{fancyhdr}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage[square]{natbib}
+\RequirePackage{subfigure}
+\RequirePackage{listings}
+\let\trace\relax % trace already defined but newly defined in physics package, workaround
+\RequirePackage{physics}
+\RequirePackage{hyperref}
+\RequirePackage[crop=pdfcrop,process=all]{pstool} % irgendwann wieder auf process=all umstellen, aber auto geht schneller
+\begin{document}
+
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/tanHPara} %width = 0.9\textwidth,
+\caption{}
+\label{fig:tanHPara}
+\end{figure}
+
+
+
+
+
+
+\end{document}

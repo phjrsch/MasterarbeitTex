@@ -1,0 +1,134 @@
+%=========================================================================
+% DEFINITIONS
+%=========================================================================
+
+% Anmerkung: \newcommand testet im Gegensatz zu \def darauf, ob ein
+% Befehl bereits vorhanden ist und gibt ggf. eine Fehlermeldung aus
+% so zum Beispiel
+%\def\mc  #1{\mbox{$\mathcal   #1$}}
+% im Vergleich zu
+%\newcommand{\mc}[1]{\ensuremath{\mathcal{#1}}}
+
+%=========================================================================
+
+% units
+\newcommand{\unit}[1]{\operatorname{#1}}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+%%
+% Mathematical Operators
+%%
+
+% non-standard tensor operators
+\newcommand{\Otimes}{\,\overline{\otimes}\,}
+\newcommand{\Utimes}{\,\underline{\otimes}\,}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\dev}{\operatorname{dev}}
+\newcommand{\trace}{\operatorname{tr}}
+\def\tran{\mathrm{t}} % transposed
+
+% derivatives
+\newcommand{\Div}[1][\te X]{\nabla_{\!#1}\cdot}
+\renewcommand{\div}[1][\te x]{\nabla_{\!#1}\cdot}
+\newcommand{\Grad}[1][\te X]{\nabla_{\!#1}}
+\newcommand{\grad}[1][\te x]{\nabla_{\!#1}}
+\newcommand{\dd}[2][]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\DD}[2][]{\frac{\mathrm{D}#1}{\mathrm{D}#2}}
+\newcommand{\pp}[2][]{\frac{\partial#1}{\partial#2}}
+
+% assembly-operator
+\def\Ass{\mathop{\mathchoice{\AssX\huge}{\AssX\Large}{}{}}}
+% helper for \Ass
+\def\AssX#1{{\setbox0=\hbox{#1\sf\textbf{A}}\lower.2\ht0\copy0}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\B}{\boldsymbol}
+\newcommand{\sfA}{ {\textsf{A}} }
+\newcommand{\BE}{{\textbf{\textsf{E}}}}
+\newcommand{\BS}{{\textbf{\textsf{S}}}}
+\newcommand{\E}{{{\textsf{E}}}}
+\newcommand{\I}{{\textsf{I}}}
+\newcommand{\Y}{{{\textsf{Y}}}}
+\newcommand{\sfC}{{{\textsf{C}}}}
+\newcommand{\sfS}{{{\textsf{S}}}}
+\newcommand{\sfT}{{{\textsf{T}}}}
+\newcommand{\BA}{{\textbf{\textsf{A}}}}
+\newcommand{\BC}{{\textbf{\textsf{C}}}}
+\newcommand{\BD}{{\textbf{\textsf{D}}}}
+\newcommand{\BI}{{\textbf{\textsf{I}}}}
+\newcommand{\BT}{{\textbf{\textsf{T}}}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\vareps}[0]{\varepsilon}
+\newcommand{\mr}[1]{\mathrm{#1}}
+\newcommand{\Mt}{{\mr{M}_\mr{t}}}
+\newcommand{\Mc}{{\mr{M}_\mr{c}}}
+\newcommand{\M}{{\mr{M}}}
+\newcommand{\A}{{\mr{A}}}
+\newcommand{\epspl}{\vareps_\mr{pl}}
+\newcommand{\epstr}{\vareps_\mr{tr}}
+\newcommand{\epstrdev}{\vareps_\mr{tr,dev}}
+\newcommand{\epstrvol}{\vareps_\mr{tr,vol}}
+\newcommand{\epsvol}{{\vareps_\mr{vol}}}
+\newcommand{\epsdev}{{\vareps_\mr{dev}}}
+
+\newcommand{\Eal}{{\textsf E}^\alpha}
+\newcommand{\Evol}{{\textsf E}_\mr{vol}}
+\newcommand{\Edev}{{\textsf E}_\mr{dev}}
+\newcommand{\hatEvol}{\widehat{{\textsf E}}_\mr{vol}}
+\newcommand{\hatEdev}{\widehat{{\textsf E}}_\mr{dev}}
+\newcommand{\sigmac}{\B\sigma_\mr{mac}}
+\newcommand{\half}{\frac{1}{2}}
+
+\newcommand{  \Isym  }{  \BI^\mr{sym}  }
+\newcommand{  \Idev  }{  \BI^\mr{dev}  }
+\newcommand{  \Ivol  }{  \BI^\mr{vol}  }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%
+% Variable Typesets
+%%
+
+% define tensor notation
+% mathchoice detects in which "surrounding" content will be placed. \mathchoice{displaystyle}{textstyle}{subscript}{subsubscript}. textstyle is inline, e.g. "normal vector $\te n$ some more text".
+\makeatletter
+\newcommand{\te}[1]{\mathchoice{\mbox{\boldmath$#1$}}{\mbox{\boldmath$#1$}}{\mbox{\let\f@size\sf@size\selectfont\boldmath$#1$}}{\mbox{\let\f@size\ssf@size\selectfont\boldmath$#1$}}}   % 1st order tensor
+\newcommand{\tz}[1]{\mathchoice{\mbox{\boldmath$#1$}}{\mbox{\boldmath$#1$}}{\mbox{\let\f@size\sf@size\selectfont\boldmath$#1$}}{\mbox{\let\f@size\ssf@size\selectfont\boldmath$#1$}}}   % 2nd order tensor
+\newcommand{\td}[1]{\mathchoice%
+{% display style
+    \dimen0=\f@size pt%
+    \addtolength{\dimen0}{-\ssf@size pt}%
+    \mbox{\raisebox{\the\dimen0}{$\scriptscriptstyle 3$}$\mathbb #1$}
+}{% text style
+    \dimen0=\f@size pt%
+    \addtolength{\dimen0}{-\ssf@size pt}%
+    \mbox{\raisebox{\the\dimen0}{$\scriptscriptstyle 3$}$\mathbb #1$}
+}{% scriptstyle
+    \let\f@size\sf@size\selectfont%
+    \dimen0=\f@size pt%
+    \addtolength{\dimen0}{-\ssf@size pt}%
+    \mbox{\raisebox{\the\dimen0}{$\scriptscriptstyle 3$}$\mathbb #1$}
+}{% scriptscriptstyle
+    \let\f@size\ssf@size\selectfont%
+    \mbox{\raisebox{1pt}{$\scriptscriptstyle 3$}$\mathbb #1$}
+}}  % 3th order tensor
+\newcommand{\tv}[1]{\mathchoice{\mbox{\boldmath$\mathsf #1$}}{\mbox{\boldmath$\mathsf #1$}}{\mbox{\let\f@size\sf@size\selectfont\boldmath$\mathsf #1$}}{\mbox{\let\f@size\ssf@size\selectfont\boldmath$\mathsf #1$}}}  % 4th order tensor
+
+% define vectors and matrices
+\newcommand{\vc}[1]{\mathchoice{\mbox{\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\let\f@size\sf@size\selectfont\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\let\f@size\ssf@size\selectfont\underline{\boldmath$\mathrm{#1}$}}}}
+\newcommand{\mx}[1]{\mathchoice{\mbox{\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\let\f@size\sf@size\selectfont\underline{\boldmath$\mathrm{#1}$}}}{\mbox{\let\f@size\ssf@size\selectfont\underline{\boldmath$\mathrm{#1}$}}}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% psfrag-abkuerzungen
+\newcommand{  \psr   }[1]{  \psfrag{#1}[r][r]{   ${\scriptstyle #1 \!\!}$ }  }
+\newcommand{  \pst   }[1]{  \psfrag{#1}[t][t]{   ${\scriptstyle #1 }$ }  }
+\newcommand{  \psrt  }[1]{  \psfrag{#1}[rt][rt]{ ${\scriptstyle #1 \!\!\!}$ }  }

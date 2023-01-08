@@ -1,0 +1,94 @@
+
+\thispagestyle{empty} % Die Seite "links" (bei beidseitigem Druck) vom Kapitelbeginn blank machen, wenn sie keinen Inhalt enthält
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\chapter{Einführung}
+\thispagestyle{fancy}
+
+
+\label{kap_einfuehrung}
+
+
+Hier werden die generelle Problemstellung und die verwendeten Methoden kurz aufgeführt.
+
+
+\section{Verweise}
+
+Dies ist ein Verweis auf Kapitel~\ref{kap_grundlagen}, indem das dort definierte \textbackslash\emph{label\{\}} hier mittels \textbackslash\emph{ref\{\}} referenziert wird.
+
+Dies ist ein Verweis auf Abschnitt~\ref{sec_notation}, indem das dort definierte \textbackslash\emph{label\{\}} hier mittels \textbackslash\emph{ref\{\}} referenziert wird.
+
+Dies ist ein Verweis auf Abschnitt~\ref{sec_tensors}, indem das dort definierte \textbackslash\emph{label\{\}} hier mittels \textbackslash\emph{ref\{\}} referenziert wird.
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+\newpage 
+
+\section{Notation}
+\label{sec_notation}
+
+The notation used in this work becomes obvious from its context. However, the following essential relations are collectively provided for the sake of the reader's convenience.
+
+\subsection{Tensors}
+\label{sec_tensors}
+In a three-dimensional Euclidean space spanned by the Cartesian basis vectors $\{\B e_{i}\}, i=1,\,2,\,3$, tensors of first, second and fourth order are expressed in terms of their coefficients $(\bullet)_i$ following Einstein's summation convention, namely
+\begin{align*}
+	\B u & = u_i \, \B e_i\, \quad, 														& &\text{(first-order~tensor,~i.e.~vector)} \\
+	\B S & = S_{ij} \, \B e_i \otimes \B e_j\, \quad, 										& &\text{(second-order~tensor)}\\
+	\BT  & = {\sfT}_{ijkl} \, \B e_i \otimes \B e_j \otimes \B e_k \otimes \B e_l\, \quad.	& &\text{(fourth-order~tensor)}
+\end{align*}
+Here and in the following, we use non-bold letters for scalars, bold-face lower-case italic letters for vectors, bold-face upper-case italic letters for second-order tensors and bold-face upper-case sans-serif letters for fourth-order tensors.
+
+
+\subsection{Inner tensor products}
+Inner tensor products are denoted by dots where the number of dots characterises the number of contractions, i.e.
+\begin{align*}
+	\B u \cdot \B v & = u_i\,v_i\, \quad,\\
+	\B S \cdot \B u & = S_{ij}\,u_{j}\,\B e_i\, \quad,\\
+	\B S \cdot \B T & = S_{ij}\,T_{jk}\,\B e_i \otimes \B e_k\, \quad,\\
+	\B S : \B T     & = S_{ij}\,T_{ij}\, \quad,\\
+	\BS : \B T      & = {\sfS}_{ijkl}\,T_{kl}\,\B e_i \otimes \B e_j\, \quad.
+\end{align*}
+An $n$-fold contraction of two $n$th-order tensors always results in a scalar.
+
+
+\subsection{Outer tensor products}
+Outer tensor products---also referred to as dyadic products---are represented by the classical symbol $\otimes$ as well as by the non-standard symbols $\overline{\otimes}$ and $\underline{\otimes}$ using the definitions
+\begin{align*}
+	\B u \otimes \B v & = u_i\,v_j\, \B e_i \otimes \B e_j \quad,\\
+	\B S \otimes \B T & = S_{ij}\,T_{kl}\, \B e_i \otimes \B e_j \otimes \B e_k \otimes \B e_l  \quad,\\
+	\B S \;\overline{\otimes}  \; \B T & = S_{ik}\,T_{jl}\, \B e_i \otimes \B e_j \otimes \B e_k \otimes \B e_l  \quad,\\
+	\B S \;\underline{\otimes} \; \B T & = S_{il}\,T_{jk}\, \B e_i \otimes \B e_j \otimes \B e_k \otimes \B e_l  \quad,\\
+\end{align*}
+The dyadic product of two first-order tensors, i.e.~vectors, results in second-order tensors, whereas the dyadic products of two second-order tensors result in fourth-order tensors.
+
+
+\subsection{Identity tensors}
+The second-order identity tensor $\B I$ and the fourth-order symmetric, volumetric and deviatoric identity tensors, $\Isym$, $\Ivol$ and $\Idev$, respectively, are defined as
+\begin{align*}
+	\B I     & = \delta_{ij} \, \B e_i \otimes \B e_j   \quad,\\
+	\Isym & = \frac{1}{2}\left[ \B I \;\overline{\otimes}  \; \B I + \B I \;\underline{\otimes}  \; \B I \right]  ,\\
+	\Ivol & = \frac{1}{3}\left[ \B I \otimes \B I \right] \quad, \\
+	\Idev & = \Isym - \Ivol \quad,  
+\end{align*}
+with the Kronecker delta symbol $\delta_{ij} = \B e_i \cdot \B e_j$.
+
+
+
+\subsection{Other fourth order tensors}
+Other fourth order tensors, such as $\BE$ and $\BS$ can be defined in the file \emph{definitions.tex}.
+
+
+
+\subsection{Norm of tensors}
+Please us the command \textbackslash Vert:
+\begin{align*}
+	\Vert \B A \Vert & = ...
+\end{align*}
+
+
+
+
+
+
+

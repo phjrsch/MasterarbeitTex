@@ -1,0 +1,43 @@
+\documentclass[fleqn,twoside,openright]{iofm_studentthesis}% remove option "german" for english version
+% load definitions, i.e. some useful shortcuts and notational stuff for tensors etc.
+\include{definitions}%
+\include{morepackages}
+
+\author{Philipp Scherm} % set Author-Name (your name!)
+\title{Multi Phase Modelling an Finite Element Implementation of Steel Heat Treatment} % your title
+% choose type of your thesis
+% Project Thesis (Bachelor) / Projektarbeit (Bachelor)
+% Bachelor Thesis / Bachelorarbeit
+% Project Thesis (Master) / Projektarbeit (Master)
+% Master Thesis / Masterarbeit
+\thesistype{Master Thesis}
+% add all your supervisors with their full name
+\addsupervisor{Prof.~Dr.-Ing.~habil.~Andreas~Menzel}
+\addsupervisor{Markus Schewe,~M.~Sc.}
+
+\begin{document}
+%
+\maketitle % Erstellt die Titelseite, welche oben durch Angabe von \author und \title noch angepasst werden kann
+%
+\addblankpage% add blank page (backside of title-page, only inserted for two-sided layout)
+%
+\thispagestyle{empty}
+\begin{figure}
+\includegraphics[width=1.0\textwidth,trim=1.3cm 0cm 1.2cm 0cm,clip]{Eidesstattliche_Versicherung} % Erstellt die zu unterschreibende Seite mit der Eidesstattlichen Versicherung
+\end{figure}
+%
+\addblankpage% add blank page (backside of Eidesstattliche_Versicherung, only inserted for two-sided layout)
+%
+\setcounter{page}{1} % Startet Seitennummerierung bei 1
+\tableofcontents % Erstellt Inhaltsverzeichnis
+%
+% Im Folgenden können die einzelnen Kapitel der Arbeit mittels \include eingefügt werden
+\include{Introduction}
+\include{model}
+\include{algo}
+%\include{equations}
+% Erstellung und Definition des Literaturverzeichnisses
+\bibliographystyle{apalike}%
+\bibliography{Literatur}%
+%
+\end{document}
