@@ -12,52 +12,79 @@ For the microstructural problem two different widely accepted (sources!!!) pheno
 The martensitic transformation relies on the Koistinen-Marburger model established by \cite{koistinen_general_1959}. It describes the transformtion using the following equation \\\\
 
 -----------------------------------------------------
-As dargelegt in the previous chapter athermal and diffusion-controlled phase transformations are treated in this thesis. The modelling of the athermal martensitic transformation  relies on the Koistinen-Marburger model established in \cite{koistinen_general_1959}. It describes the transformtion using the following equation 
+As dargelegt in the previous chapter athermal and diffusion-controlled phase transformations are treated in this thesis. In athermal transformations there is no thermal activation, e. g. incubation time and no time dependence. The transformation is purely driven by cooling. If there is no further cooling the transformation stops. The transformation from austenite to martensite is regarded as being athermal. It's modelling relies on the Koistinen-Marburger model established in \cite{koistinen_general_1959}. It describes the evolution of the volume fraction of martensite $\beta_M$ that is also depicted in fig. \ref{fig:MartDevelop} using the following equation 
 \begin{equation}
 	\beta_M =  1 - e^{-k\,(M_S - T)} \quad. \label{eq:KM}
 \end{equation}
-The parameters $k$ is material specific and describes the speed of the transformation. The martensite starting temperature $M_S$ depends on the material and the other factors as the local carbon content that can be influenced by other phase transformations \ref... It determines the temperature at which the transformation starts. The martensite finish temperature $M_F$ is merely a function of the other given parameters. It is defined as the temperature at which the volume fraction of martensite reaches 0.99\%.\\
-Since the development of martensite is driven purely by cooling there is no time dependence. If there is no further cooling the transformation stops. \textit{This kind of transformation is called athermal because there is no thermal activation, no waiting time, opposite of isothermal. In this thesis regarded as athermal also there might be something with thermal activation going on} \\
+The parameter $k$ is material specific and describes the speed of the transformation. The martensite starting temperature $M_S$ depends on the material and the other factors as the local carbon content that can be influenced by other phase transformations \ref... It determines the temperature at which the transformation starts. The transformation is regarded as complete when the martensitic volume fraction reaches $99\%$. The martensite finish temperature $M_F$ can be calculated by rearranging \ref{eq:KM} and inserting $\beta_M = 99\%$.\\
 \begin{figure}[h]%[h]
 \centering
 \psfragfig[ trim = 0 0 0 0, clip = true]{figs/MartDevelopment} 
 \caption{Development of the martensite volume fraction under cooling.}
 \label{fig:MartDevelop}
 \end{figure}
-Eq. \ref{eq:KM} yields the development depicted in fig. \ref{fig:MartDevelop}
 The rate of the martensitic transformation can be described by 
 \begin{equation}
 	\dot{\beta}_M = -e^{-k\left[M_S-T\right]} \,k \, \dot{T} = \left[ 1-e^{-k\left[M_S-T\right]} - 1 \right] k \, \dot{T} = - \left[ 1-\beta_M \right] k \, \dot{T} \quad. 
 \end{equation}
-While this equation is valid when only considering the transformation from austenite to martensite it can be generalized for the usage with more phase transformations by interpreting the term $1-\beta_M$ as the remaining austenite $\beta_A$ available for transformation. This yields the following rate for the evolution of the martensitic phase: 
+While this equation is valid when only considering the transformation from austenite to martensite it can be generalized for the usage with more phase transformations by interpreting the term $1-\beta_M$ as the remaining austenite $\beta_A$ available for transformation. This yields the following rate for the evolution of the martensitic phase
 \begin{equation}
 	\dot{\beta}_M = - \beta_A \, k \, \dot{T} \quad. \label{eq:rateKM}
 \end{equation}
 
-The other transformations considered in this thesis are regarded as diffusion-controlled with thermal activation. There is a time-dependence in these transformations and they do continue isothermally when the cooling is stopped. \\
-The equation used to describe this transformation 
-
-is the JMAK law developed by Johnson, Mehl, Avrami and Kolmogorov (Avrami, 1940; Cahn, 1956). 
+The other transformation considered in this thesis is regarded as diffusion-controlled with thermal activation. There is a time-dependence in these transformations and they do continue isothermally when the cooling is stopped \ref... The transformation from austenite to bainite falls into this category. Schlecht.  \\
+Diffusional processes and transformations are often modelled using the...
+The equation used to describe this transformation is the JMAK law developed by Johnson, Mehl, Avrami and Kolmogorov (Avrami, 1940; Cahn, 1956) which is only valid for isothermal transformations. 
 The JMAK law 
 \begin{equation}
-	\beta_B = \hat{\beta}_B^{max}\,[1-e^{-b_B\,(t^{N_B})}] \label{eq:JMAK}
+	\beta_B = \hat{\beta}_B\,[1-e^{-b_B\,(t^{N_B})}] \label{eq:JMAK}
 \end{equation}
-yields the sigmoidal shape seen in fig. \ref{fig:ficTime} with a slow start and a slow finish of the transformation but a high rate in between. It is only valid for isothermal transformations. 
+can be used for various diffusional transformations and other time dependent processes
+Here it is used to model the development of the volume fraction of bainite $\beta_B$ where $\hat{\beta}_B$ is the maximal amount of bainite reached in the transformation. Irgendwas mit  $\hat{\beta}_B = \beta_A + \beta_B$
+
+with the maximal volume fraction of bainite $\hat{\beta}_B = \beta_A+\beta_B$  that can be reached if all austenite  and the
+yields sigmoidal shapes seen in fig. \ref{fig:ficTime} with a slow start and a slow finish of the transformation but a high rate in between.
 The parameters 
 \begin{align}
 	N_B(T) = \frac{6.1273}{\ln(\frac{t_B^f}{t_B^s})}\,\quad \text{and} \quad b_B(T) = \frac{0.01005}{(t^s_B)^{N_B(T)}}
 \end{align}
-are derived using the starting and finishing time $t_B^s$ and $t_B^f$ for the diffusive transformation. Those are defined at volume fraction of 1\% and 99\% of the target phase. The parameters are temperature dependent and can be determined from experimental TTT diagrams (Diss Yu 1977 oder so). \\
+are derived using the starting and finishing time $t_B^s$ and $t_B^f$ for the diffusive transformation. Those are defined at volume fraction of $1\%$ and $99\%$ of the target phase. The parameters are temperature dependent and can be determined from experimental TTT diagrams (Diss Yu 1977 oder so). \\
 The time derivation of the JMAK law eq. \ref{eq:JMAK} yields the rate equation for isothermal cooling
 \begin{equation}
-	\dot{\beta}_B = \hat{\beta}_B^{max}\,b_B\,N_B\,t^{(N_B-1)}\,[1-\beta_B] \quad. \label{eq:ABrate0}
+	\dot{\beta}_B = \hat{\beta}_B\,b_B\,N_B\,t^{(N_B-1)}\,[1-\beta_B] \quad. \label{eq:ABrate0}
 \end{equation}
 
 
 % Adaption of JMAK law for anisothermal
-As the JMAK law is only valid for isothermal transformations it has to be adapted to depict a cooling process. 
+As the JMAK law---and TTT-diagrams from which the parameters are derived---is only valid for isothermal transformations 
+it has to be adapted to depict a cooling process. \\ 
 
-Something with isokinetic and additivity Scheil and Cahn. 
+
+
+In \cite{scheil_anlaufzeit_1935} a theory of the additivity of fractional nucleation is developed to predict the start of transformation from austenite during cooling.  The so-called `additivity rule' states that transformation starts when the fractions of nucleation $\frac{\Delta t_i}{\tau(T_i)}$ amassed during the cooling reaches unity.
+\begin{equation}
+	\int^{T_{x}}_{T_{0}} \frac{\dd{t}}{\tau(T)} = 1 %\approx \sum_{i=0}^{t_x} \frac{\Delta t_i}{\tau(T_i)} \quad
+\end{equation}
+where  $T_{0}$ is an equilibrium temperature at which no nucleation happens, $T_{x}$ is the temperature at which the transformation starts when following an anisothermal temperature path and $\tau(T)$ is the incubation time after that transformation starts for an isothermal temperature path. This means for a discretized calculation that the transformation starts when the fractions of nucleation at every time increment $\frac{\Delta t_i}{\tau(T_i)}$ amassed during the cooling reaches unity as follows
+\begin{equation}
+	\sum_{}^{} \frac{\Delta t_i}{\tau(T_i)} = 1 \quad.
+\end{equation}
+It is shown in \cite{lusk_rule_1997} and \cite{christian_formal_2002} that this holds true for transformations that are isokinetic, c.f. \cite{cahn_transformation_1956}, and whose rate can be expressed in the following form 
+\begin{equation}
+	\dot \beta = h(\beta)\, g(T)
+\end{equation}
+like eq. \ref{eq:ABrate0}.
+
+Based on the additivity rule \cite{tzitzelkov_mathematische_1974} developed an algorithm to predict the phase development for continuous cooling. 
+For this the cooling curve 
+A continuous temperature curve can be discretized into isothermal increments as in fig. \ref{fig:discCoolCurve}. 
+
+\begin{figure}[h]%[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/discretizedCoolingCurve} 
+\caption{Continuous and incrementally isothermal discretized cooling curve.}
+\label{fig:discCoolCurve}
+\end{figure}
 
 
 
@@ -95,7 +122,7 @@ Then transformation is again  following the curve for $T2$ for a $\Delta t$ of 1
 
 % include more graphics 
 
-To incorporate the fictitious time into the rate equation the steps laid out in (Reti 2001) are done. Using the JMAK law \ref{eq:JMAK}, the fictitious time for a given volume fraction $\beta_B$ and a temperature $T$ the fictitious time $t^\ast $is derived as 
+To incorporate the fictitious time into the rate equation the steps laid out in (Reti 2001) are done. Using the JMAK law \ref{eq:JMAK}, the fictitious time for a given volume fraction $\beta_B$ and a temperature $T$ the fictitious time $t^\ast$ is derived as 
 \begin{equation}
 	t^\ast = \left( \frac{\ln A}{b(T_{i+1})}\right)^\frac{1}{N(T_{i+1})}, \quad A = \frac{\hat{\beta}}{\hat{\beta}-\beta_i}  \quad.
 \end{equation}
@@ -103,9 +130,9 @@ This relation then is inserted into the rate equation \ref{eq:ABrate0} to replac
 \begin{equation}
 	\dot{\beta} = N\,b^{\frac{1}{N}}\,(\hat{\beta}-\beta)\,\left(\ln A \right)^{1-\frac{1}{N}}\quad. \label{eq:ABrate}
 \end{equation}
-The generalization of the rate equation for more phases \textit{works similar} to the generalizatsion of the martensitic rate. The maximal volume fraction of bainite $\hat{\beta}$ in (Oliviera 2010) is interpreted as 
+The generalization of the rate equation for more phases \textit{works similar} to the generalization of the martensitic rate. The maximal volume fraction of bainite $\hat{\beta}$ in (Oliviera 2010) is interpreted as 
 \begin{equation}
-	\hat{\beta} = \beta_A = 1 - \beta_M \quad. 
+	\hat{\beta} = \beta_A + \beta_B = 1 - \beta_M \quad. 
 \end{equation}
 This leads to a desired coupling of the rate equations of Bainite and Martensite. \\\\
 
