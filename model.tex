@@ -3,13 +3,42 @@
 \label{chap:model}
 Heat treatment problems require the solution of three problems. Heat transfer, mechanical material response and phase transformation are coupled by their physical interactions. 
 
+\section{Metallurgy}
+Heat treatment of steel aims to alter the microstructure in 
+
+Influence on the decomposition of austenite by the cooling rate and path
+
+The German standard \cite{din_en_10020_din_2000} defines steel in the most common form to be iron with a carbon content below 2\%. Depending on the microstructure different phases are distinguished. They are characterized by their chemical composition, crystal lattice and shape. These characteristics influence the macroscopical properties exhibited by steel like strength, toughness, hardness and ductility. In a heat treatment process the microstructure  and the properties can be altered. 
+Here three different phases are of interest, austenite, pearlite, bainite and martensite. 
+When steel is heated and held at a suffcient temperature and sufficient time it consists of stable and solid austenite. Austenite has a face-centered cubic lattice ($\gamma$-iron) with the an iron atom on every corner and at the center of each face. The carbon is dissolved in the interstitial spaces between the iron atoms. Austenite is the starting point of the modelled quenching process. \\ \\
+Martensite was discovered by Floris Osmond and named after Adolf Martens in \cite{osmond_microscopic_1904}. It forms when austenite is quenched with a high cooling rate so that the diffusion of carbon out of the lattice is suppressed. 
+Martensite exhibits a body-centered tetragonal structure and is supersaturated with carbon. The stretch from a cubic austenite structure to tetragonal martensite causes shear strains of a magnitude of 0.26, see \cite{bhadeshia_worked_2001}, and dislocations that lead to high hardness of martensite. From martensitic steel a Brinell hardness of 700 can be achieved while the maximum of a pearlitic structure is approximately 400 Brinell, c.f. \cite{eugene_a_avallone_iron_2007}. \\
+
+In \cite{cohen_martensite_1992} the martensite transformation is described as being of displacive nature, accompanied by a change in the crystal lattice. In steel it is athermal. There is no thermal activation, e. g. incubation time and no time dependence. 
+
+The transformations starts at the martensite start temperature $M_S$ and is driven by cooling until the martensite finish temperature $M_F$ is reached. The transformation is only driven by cooling and not by the time spent below $M_S$.  If there is no further cooling the transformation stops. It is possible for a material cooled to room temperature to retain austenite if the $M_F$ temperature is below room temperature. \\
+In iron-alloys without carbon martensite transformation occurs isothermally. 
+
+When not quenched quickly enough to suppress it, diffusion of carbon occurs below the temperature $A_3$. With decreasing temperature, the carbon-solubility of austenite drops and carbon diffuses out of the lattice. The carbon-depleted structure turns into ferrite which is almost pure iron with a body-centered cubic lattice ($\alpha$). The locally carbon-enriched neighbouring structure turns into perlite. Perlite is a mixture of 87.5 wt\% ferrite and 12.5 wt\% carbide in lamellar structure that forms below the temperature $A_1$. By the diffusion of carbon the struxture is alternatingly locally carbon-enriched and depleted. In the depleted parts ferrite forms while the enriched structure turns into cementite. Cementite is a chemical compound of iron and steel $FE_3C$. 
+The lamellae structure is similar to that of mother-of-pearl which gives the steel phase it's name. 
+
+While there are views that bainite is formed in a reconstructive way \cite{bhadeshia_bainite_1990}, in this thesis the bainite formations is regarded as displacive \cite{bhadeshia_bainite_2019}
+Below a temperature of about 580°C reconstructive transformation is virtually non-existent because iron and alloying atoms are virtually immobile while carbon still solutes. \cite{christian_simple_1990} 
+-\> bainte start temperature
+
+Bainite is formed below the bainite start temperature $B_S$ when the matrix atoms of the lattice are virtually immobile while the carbon atoms are still in solution. 
+Upper bainite above $M_S$ lower bainite below it. 
+
+Differentiation of the transformations in reproductive-displacive and athermal-isothermal \cite{bhadeshia_bainite_1990} 
+
+
 \section{Phase Transformations}
 
-Within this work two different kind of phase transformations are treated. Martensite transformation is athermal without thermal activation while the trnsformation into bainite is diffusion controlled. The bainite transformation is time dependent while martensite transformation is only driven by cooling, c.f. \cite{totten_steel_2007}. \\
+Within this work two different kind of phase transformations are treated. Martensite transformation is athermal without thermal activation while the transformation into bainite is diffusion controlled. The bainite transformation is time dependent while martensite transformation is only driven by cooling, c.f. \cite{totten_steel_2007}. \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 
 For the microstructural problem two different widely accepted (sources!!!) phenomenological models are used.\\
-The martensitic transformation relies on the Koistinen-Marburger model established by \cite{koistinen_general_1959}. It describes the transformtion using the following equation \\\\
+The martensite transformation relies on the Koistinen-Marburger model established by \cite{koistinen_general_1959}. It describes the transformtion using the following equation \\\\
 
 -----------------------------------------------------
 As dargelegt in the previous chapter athermal and diffusion-controlled phase transformations are treated in this thesis. In athermal transformations there is no thermal activation, e. g. incubation time and no time dependence. The transformation is purely driven by cooling. If there is no further cooling the transformation stops. The transformation from austenite to martensite is regarded as being athermal. It's modelling relies on the Koistinen-Marburger model established in \cite{koistinen_general_1959}. It describes the evolution of the volume fraction of martensite $\beta_M$ that is also depicted in fig. \ref{fig:MartDevelop} using the following equation 
@@ -23,7 +52,7 @@ The parameter $k$ is material specific and describes the speed of the transforma
 \caption{Development of the martensite volume fraction under cooling.}
 \label{fig:MartDevelop}
 \end{figure}
-The rate of the martensitic transformation can be described by 
+The rate of the martensite transformation can be described by 
 \begin{equation}
 	\dot{\beta}_M = -e^{-k\left[M_S-T\right]} \,k \, \dot{T} = \left[ 1-e^{-k\left[M_S-T\right]} - 1 \right] k \, \dot{T} = - \left[ 1-\beta_M \right] k \, \dot{T} \quad. 
 \end{equation}
@@ -39,7 +68,7 @@ The JMAK law
 \begin{equation}
 	\beta_B = \hat{\beta}_B\,[1-e^{-b_B\,(t^{N_B})}] \label{eq:JMAK}
 \end{equation}
-can be used for various diffusional transformations and other time dependent processes
+can be used for various diffusional transformations and other time dependent processes. \cite...
 Here it is used to model the development of the volume fraction of bainite $\beta_B$ where $\hat{\beta}_B$ is the maximal amount of bainite reached in the transformation. Irgendwas mit  $\hat{\beta}_B = \beta_A + \beta_B$
 
 with the maximal volume fraction of bainite $\hat{\beta}_B = \beta_A+\beta_B$  that can be reached if all austenite  and the
@@ -61,14 +90,34 @@ it has to be adapted to depict a cooling process. \\
 
 
 
-In \cite{scheil_anlaufzeit_1935} a theory of the additivity of fractional nucleation is developed to predict the start of transformation from austenite during cooling.  The so-called `additivity rule' states that transformation starts when the fractions of nucleation $\frac{\Delta t_i}{\tau(T_i)}$ amassed during the cooling reaches unity.
+In \cite{scheil_anlaufzeit_1935} a theory of the additivity of fractional nucleation is proposed to predict the start of the transformation from austenite during cooling.  The so-called `additivity rule' states that transformation starts when the fractions of nucleation $\frac{\Delta t_i}{\tau(T_i)}$ accumulated during the cooling reaches unity
 \begin{equation}
-	\int^{T_{x}}_{T_{0}} \frac{\dd{t}}{\tau(T)} = 1 %\approx \sum_{i=0}^{t_x} \frac{\Delta t_i}{\tau(T_i)} \quad
+	\int^{T_{x}}_{T_{0}} \frac{\dd{t}}{\tau(T)} = 1 \quad. %\approx \sum_{i=0}^{t_x} \frac{\Delta t_i}{\tau(T_i)} \quad
 \end{equation}
-where  $T_{0}$ is an equilibrium temperature at which no nucleation happens, $T_{x}$ is the temperature at which the transformation starts when following an anisothermal temperature path and $\tau(T)$ is the incubation time after that transformation starts for an isothermal temperature path. This means for a discretized calculation that the transformation starts when the fractions of nucleation at every time increment $\frac{\Delta t_i}{\tau(T_i)}$ amassed during the cooling reaches unity as follows
+$T_{0}$ is an equilibrium temperature at which no nucleation happens, $T_{x}$ is the temperature at which the transformation starts when following an anisothermal temperature path and $\tau(T)$ is the incubation time after that transformation starts for an isothermal temperature path. This means for a discretized calculation that the transformation starts when the fractions of nucleation at every time increment $\frac{\Delta t_i}{\tau(T_i)}$ amassed during the cooling reaches unity as follows
 \begin{equation}
 	\sum_{}^{} \frac{\Delta t_i}{\tau(T_i)} = 1 \quad.
 \end{equation}
+This empirical relation is used in \cite manningloring, wever to relate the starting time of transformation from isothermal and anisothermal. 
+Pumphrey predicts the hardness of specimens after continuous and step-wise cooling 
+
+Different criteria and conditions have been proposed for the additivity of a transformation. 
+Cahn and Avrami call it isokinetic when nucleation and growth rate are proportional at the same phase composition. The development of a phase at two different transformations is the same besides a time factor. In a logarithmic plot they look identical with the slower one shifted to the right side. 
+directly quote Hollomon?? 
+
+This equals to a condition 
+
+\begin{equation}
+	\dot{beta} = g(\beta)\,h(T)
+\end{equation}
+Cahn proposes a less strict condition 
+\begin{equation}
+	\dot{beta} = f(\beta,T)
+\end{equation}
+that is 
+
+
+
 It is shown in \cite{lusk_rule_1997} and \cite{christian_formal_2002} that this holds true for transformations that are isokinetic, c.f. \cite{cahn_transformation_1956}, and whose rate can be expressed in the following form 
 \begin{equation}
 	\dot \beta = h(\beta)\, g(T)
@@ -155,3 +204,15 @@ Bringe ich die Metallurgie in dieses Kapitel und mische sie mit den Gleichungen 
 \section{Thermal Problem}
 
 The thermal problem is governed by the heat equation 
+
+
+\section{mechanical}
+The heat treatment problem is solved for small strains. The strain measurement is defined as 
+\begin{equation}
+	\varepsilon = \frac{1}{2}\left( \nabla_x u + [\nabla_x u]' \right)
+\end{equation}
+with $u$ being the displacement. The mechanical problem is governed by the balance of linear momentum 
+\begin{equation}
+	\nabla_x \sigma = 0 \quad. 
+\end{equation}
+The equations are now discretized and 

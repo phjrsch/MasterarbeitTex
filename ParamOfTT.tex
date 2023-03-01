@@ -1,0 +1,114 @@
+
+\section{Parametrisation of TTT-diagrams}
+For the procedures detailed in chapter \ref{ algo mit fic time} it is essential to determine the functions $N(T)$ and $b(T)$. They can be derived from TTT-diagrams as proposed in \cite{tzitzelkov_mathematische_1974} **Gefällt mir nicht**. \\
+Time-Temperature Transformation (TTT) or Isothermal Transformation (IT) diagrams were first introduced in a study now considered as groundbreaking by \cite{davenport_transformation_1930}. They describe the decomposition of austenite into different phases at constant temperatures. In the following years after the mentioned study a large number of steels characterized in research papers and by steelmakers (c.f. \cite{vander_voort_atlas_1991}, \cite{us_steel_uss_1963}).\\
+To **make them** specimens are rapidly quenched to the **zur untersuchenden** temperature and held isothermally to investigate the transformation over time with the use of microscopy and dilatometry. In more recent years the usage of X-ray diffraction and transmission electron microscopy has become common. \\
+The starting and the finish time of the transformation defined by a volume fraction of the product phase of 1 \% and 99 \% are entered into the diagram. This leads to the C-shapes seen in fig. \ref{ TTT diagram } It is also common to see intermediate volume fractions of e.g. 10\%, 50\% and 90\%. 
+Nowadays the use of more advanced techniques like X-ray diffraction and transmission electron microscopy is common. 
+
+
+For the modelling of the phase transformations the parameters $N(T)$ and $b(T)$ need to be  ...
+
+The C-shaped lines of constant volume fractions $\beta$ can be described by rearranging the JMAK law (eq. \ref{eq:JMAK}) 
+\begin{equation}
+	t^{\ast}(\beta,\, N(T),\, b(T)) = \frac{-\log(1-\beta)}{b(T)}^{1/N(T)}
+\end{equation}
+with the parameters $N(T)$ and $b(T)$ as functions of T. \\
+Data points for the described lines and volume fractions of 1, 10, 50, 90 and 99 \% are extracted from the IT-diagram for SAE 4140 provided in \cite{vander_voort_atlas_1991} by using the Webplotdigitizer Tool by \cite{rohatgi_webplotdigitizer_2022}.\\ 
+By minimizing a cost function $f$ for every temperature $T_j$ %with more than two data points
+\begin{align}
+	t^\ast(\beta,N,b) &= \frac{-\log(1-\beta)}{b}^{1/N}\\
+	f_j &= \sum^i \left[ t^\ast(\beta_{i},N_j,b_j) - t(\beta_{i},T_j)\right]^2\\
+	N_j,\, b_j &= \underset{t^\ast}{\operatorname{arg~min}} (f_j)
+\end{align}
+with the data points from the bainite region for $t^{\ast}(\beta_{i},T)$ and $\beta_i = \{0.01,0.1,0.5,0.9,0.99\}$ 
+$N_j$ and $b_j$ are determined for every $T_j$ and plotted against the temperature in \ref{fig:plotNB}.
+For $b$ it seems appropriate to use an exponential ansatz function so $\log{b}$ is also depicted. The sawtooth-like profile on the right side of each graph is the result of the decreasing number of data points per temperature at higher temperatures. 
+
+
+
+
+% TTT-diagrams like the one in fi. \ref... are derived experimentally by doing isothermal transformation experiments at various temperatures. For those a specimen is rapidly cooled until it reaches the target temperature and then held there until transformation is finished. These experiments are carried out in a dilatometer that measures the change of length of the specimen. Due to the occurrence of transformation strains the change of length can indicate transformation development. The time when length change indicates that the volume fraction of the product phase reaches 1 \% and 99 \% is entered in the diagram as the start and finish time of the transformation. It is also common to see intermediate volume fractions of e.g. 10\%, 50\% and 90\%. 
+
+% To determine $N_B(T)$ and $b_B(T)$ curve fitting procedures are carried out. 
+% Using the Webplotdigitizer Tool \cite{Rohatgi2022}   from the isothermal TTT-digram \cite{vander_voort_atlas_1991} for the investigated steel SAE4140 the 
+% delta T = 5K for all volume fraction times. 
+
+% times from diagram tB
+% Using a cost function f for every temperature with more than two data points 
+% \begin{align}
+% 	t_B^\ast(\beta_B,N_B,b_B) &= \frac{-\log_{10}(1-\beta_B)}{b_B}^{1/N_B}\\
+% 	f &= \sum^i \left[ t_B^\ast(\beta_{Bi},N_B,b_B) - tB(\beta_{Bi},T)\right]^2\\
+% 	N_B\, b_B &= arg~min (f)
+% \end{align}
+% $N_B$ and $b_B$ are determined and plotted against the temperature in \ref{fig:NBPlot}.
+
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/plotNB} %width = 0.9\textwidth,
+\caption{Parameters fitted from TTT-diagram.}
+\label{fig:plotNB}
+\end{figure}
+
+In \cite{yu_berechnung_1977} a second order polynomial ansatz is chosen for the parametrization of $N(T)$ and $\log b(T)$ while \cite{tzitzelkov_mathematische_1974} uses a similar ansatz with polynomials of third order leading to the following parametrization 
+\begin{align}
+	N &= a + b\,T + c\,T^2 + d\,T^3\\
+	b &= exp(e + f\,T + g\,T^2 + h\,T^3) \Leftrightarrow \log b = e + f\,T + g\,T^2 + h\,T^3 \quad. 
+	\label{eq:ParametrizationNb}
+\end{align}
+Using a least square functional the 
+\begin{align}
+	f = \frac{1}{2} \sum_i w8_i \, \left[ \log_{10}( t^\ast(\beta_i,N(T),b(T)) ) - \log_{10}( t(\beta_{i},T) )\right]^2 %\\
+	% \text{coefficients of polynomials} = \underset{x}{\operatorname{arg~min}} 
+\end{align}
+with weights $w8_i$ assigned to C-shaped lines of constant $\beta_i$ the coefficients of different polynomial ansatz for the bainite transformation are determined. The resulting TTT-diagrams are depicted in fig. \ref{versch fits. } It is suggested to use the $\log_{10}$ of the times to deal with data in a similar order of magnitude.
+
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/NbFitLinear} %width = 0.9\textwidth,
+\caption{TTT-diagram with a linear polynomial ansatz for N(T) and log b(T)}
+\label{fig:NbFitLinear}
+\end{figure}
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/NbFitQuadratic} %width = 0.9\textwidth,
+\caption{TTT-diagram with a quadratic polynomial ansatz for N(T) and log b(T)}
+\label{fig:NbFitQuad}
+\end{figure}
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/NbFitCubic} %width = 0.9\textwidth,
+\caption{TTT-diagram with a cubic polynomial ansatz for N(T) and log b(T)}
+\label{fig:NbFitCubic}
+\end{figure}
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/NbFitNcubebquad} %width = 0.9\textwidth,
+\caption{TTT-diagram with a cubic polynomial ansatz for N(T) and a quadratic for log b(T)}
+\label{fig:NbFitNcubebquad}
+\end{figure}
+\begin{figure}[h]
+\centering
+\psfragfig[ trim = 0 0 0 0, clip = true]{figs/NbFitNquadbcube} %width = 0.9\textwidth,
+\caption{TTT-diagram with a quadratic polynomial ansatz for N(T) and a cubic for log b(T)}
+\label{fig:NbFitNquadbcube}
+\end{figure}
+
+
+
+For SAE 4140 the use of polynomials of ... order seems appropriate which yields the following parametrization for the transformation into bainite
+\begin{align}
+	N &= a + b\,T + c\,T^2 + d\,T^3\\
+	b &= exp(e + f\,T + g\,T^2 + h\,T^3)\\ 
+	a =... \quad
+\end{align}
+The dazugehörige TTT-diagram is depicted in fig. \ref....
+
+
+
+% @misc{Rohatgi2022,
+%   url = {https://automeris.io/WebPlotDigitizer},
+%   author = {Rohatgi,  Ankit},
+%   title = {Webplotdigitizer: Version 4.6},
+%   year = {2022}
+% }

@@ -1,0 +1,52 @@
+\section{Avrami+addi}
+
+The equation used to describe this transformation is the JMAK law developed by \cite{johnson_reaction_1939}, \cite{avrami_kinetics_1940} and Kolmogorov. It is only valid for isothermal transformations. 
+The JMAK law 
+\begin{equation}
+	\beta = \hat{\beta}\,[1-e^{-b\,(t^{N})}] \label{eq:JMAK}
+\end{equation}
+can be used for various diffusional transformations and other time dependent processes from the crystallization of plastics \cite{cebe_application_1988} to the growth of untreated tumors \cite{villar_goris_correspondence_2020}.\\
+% Here it is used to model the development of the volume fraction of bainite $\beta_B$ where $\hat{\beta}_B$ is the maximal amount of bainite reached in the transformation. Irgendwas mit  $\hat{\beta}_B = \beta_A + \beta_B$
+% with the maximal volume fraction of bainite $\hat{\beta}_B = \beta_A+\beta_B$  that can be reached if all austenite  and the
+It yields sigmoidal shapes seen in fig. \ref{fig:ficTime} with a slow start and a slow finish of the transformation but a high rate in between. \\
+% A basic assumption in the derivation of the JMAK law is a constant ratio between the nucleation rate and the growth rate. This kind of reaction is termed `isokinetic'.
+% a rate of nucleation proportional to the rate of growth of the product phase for the same fraction of product phase over a temperature range. For two reactions at two temperatures T1 and T2 with the same phase composition, if the nucleation rate at T2 is double the nucleation rate at T1, the growth rate at T2 also has to be double the growth rate at T2.
+% This kind of reaction is termed `isokinetic'.
+
+To model nonisothermal transformation usually it is tried to relate it to the isothermal case and discretize a continuous cooling curve into isothermal steps and use the assumption of additivity. A different approach using two rates for nucleation and growth has been proposed in \cite{fasano_modelling_1991}. 
+
+
+In \cite{scheil_anlaufzeit_1935} a theory of the additivity of fractional nucleation is proposed to predict the start of the decomposition of austenite during cooling.  The so-called `additivity rule' states that transformation starts when the fractions of nucleation $\frac{\Delta t_i}{\tau(T_i)}$ accumulated during the cooling reaches unity
+\begin{equation}
+	\int^{T_{x}}_{T_{0}} \frac{\dd{t}}{\tau(T)} = 1 \quad. %\approx \sum_{i=0}^{t_x} \frac{\Delta t_i}{\tau(T_i)} \quad 
+	\label{eq:additivity}
+\end{equation}
+$T_{0}$ is an equilibrium temperature at which no nucleation happens, $T_{x}$ is the temperature at which the transformation starts when following the nonisothermal temperature path and $\tau(T)$ is the incubation time after that transformation starts for an isothermal temperature path. \\
+% In discretized terms the additivity rule reads 
+% \begin{equation}
+% 	\sum_i \frac{\Delta t_i}{\tau(T_i)} = 1.
+% \end{equation}
+
+In the literature different conditions for the applicability of the additivity rule have been proposed. According to Avrami only isokinetic reactions are additive. For reactions described as isokinetic there is a constant ratio between the nucleation rate and the growth rate. In Avrami's sense this is true for reactions with a constant $N$-value in the JMAK-law eq. \ref{eq:JMAK}. Proof can be found in \cite{agarwal_mathematical_1981}. 
+
+
+Woher kommmen auf einmal Nukleation und Wachstum\\
+
+
+\cite{cahn_transformation_1956} extended it to what he called general isokinetic transformations. In Cahn's sense general isokinetic transformations are defined by a rate of the form
+\begin{equation}
+\dot{\beta} = g(T) \, h(\beta) \quad \label{eq:rateIsokinetic}
+\end{equation}
+that can be written as two independent functions of $T$ and $\beta$ which are linked multiplicatively and is independent of the cooling rate $\dot T$. \\ 
+In \cite{todinov_alternative_1998} it is proven that eq. \ref{eq:rateIsokinetic} is a necessary and sufficient condition for the application of Scheil's additivity in eq. \ref{eq:additivity}.\\
+Cahn further broadened the valid application of additivity to any kinetic and cooling rate-independent transformations with a rate depending of $T$ and $\beta$ 
+\begin{equation}
+	\dot{\beta} = f\,(T,\beta) \quad. \label{eq:rateKinetic}
+\end{equation}
+This conclusion invalidated in \cite{lusk_rule_1997} by showing a class of transformation rates that is not additive in Scheil's sense. 
+However \cite{agarwal_mathematical_1981} proposes a numerical procedure for transformations that are not additive in accordance with eq. \ref{eq:additivity} but in a general sense when an nonisothermal path is approximated by isothermal steps. \\
+
+The additivity rule has been used e.g. to predict hardness after transformation \cite{pumphrey_inter-relation_1948} or to determine CCT-diagrams from TTT-diagrams \cite{tzitzelkov_mathematische_1974}.....
+
+
+Now describe the algorithm of Agarwal and Reti/Cetinel) with fictitious time, nice graphs and stuff

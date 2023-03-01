@@ -4,7 +4,7 @@
 
 
 After establishing the rate equations for the phase transformations \ref{eq:ABrate} and \ref{eq:rateKM} in the previous chapter \ref{chap:model} there are modifications and regularisations necessary before one is able to use them for computation. For both equations a term $\zeta$ is introduced that controls whether transformation is happening or not, cf. \cite{pacheco_analysis_2001} and \cite{de_oliveira_thermomechanical_2010}. \\
-For the martensitic transformation $\zeta_{A \rightarrow B}$ contains two heaviside functions $\Gamma$ and a regularized step function using a $\tanh$. The first heaviside function $\Gamma(-\Delta\,T)$ ensures irreversibility and that transformation only occurs during cooling. The second heaviside function $\Gamma(T-M_F)$ prevents transformation below the martensite finish temperature. The regularized step function $\tanh(A\*(M_S-T))/2 + 1/2$ starts the transformation after the temperature is blow the martensite starting temperature. The regularization deals with the discontinuity of the transformation rate at $T=M_S$. The influence of $A$ is depicted in fig. \ref{fig:tanHPara}.
+For the martensite transformation $\zeta_{A \rightarrow B}$ contains two heaviside functions $\Gamma$ and a regularized step function using a $\tanh$. The first heaviside function $\Gamma(-\Delta\,T)$ ensures irreversibility and that transformation only occurs during cooling. The second heaviside function $\Gamma(T-M_F)$ prevents transformation below the martensite finish temperature. The regularized step function $\tanh(A\*(M_S-T))/2 + 1/2$ starts the transformation after the temperature is blow the martensite starting temperature. The regularization deals with the discontinuity of the transformation rate at $T=M_S$. The influence of $A$ is depicted in fig. \ref{fig:tanHPara}.
 \begin{figure}[h]
 \centering
 \psfragfig[ trim = 0 0 0 0, clip = true]{figs/tanHPara} %width = 0.9\textwidth,
@@ -71,3 +71,6 @@ with the iteration counter $k$ requires the derivation of the tangent
 	\pdv{R_{\beta_M}}{\beta_B} = -k\,\Delta T \, \zeta_{A \rightarrow M}\\
 	\pdv{R_{\beta_M}}{\beta_M} = 1 - k\,\Delta T \,\zeta_{A \rightarrow M} \quad.
 \end{gather}
+
+
+\section{Implementation in Abaqus}
